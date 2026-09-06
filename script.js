@@ -196,3 +196,49 @@ function getMotivation(gwa, scale) {
   }
 }
 
+//TO-DO LIST whahaha
+const taskInput = document.getElementById('task-input');
+const noteInput = document.getElementById('note-input');
+const dueDateInput = document.getElementById('due-date-input');
+const addTaskBtn = document.getElementById('add-task-btn');
+
+const missingSection = document.getElementById('missing-section');
+const upcomingSection = document.getElementById('upcoming-section');
+const doneSection = document.getElementById('done-section');
+
+function getTasks() {
+  return JSON.parse(localStorage.getItem('todoTasks')) || [];
+}
+
+// massave 
+function saveTasks(tasks) {
+  localStorage.setItem('todoTasks', JSON.stringify(tasks));
+}
+
+// basta add task function
+function addTask() {
+  const taskName = taskInput.value.trim();
+  const note = noteInput.value.trim();
+  const dueDate = dueDateInput.value;
+
+  if (!taskName) return; // don't add an empty task
+
+  const tasks = getTasks();
+  tasks.push({
+    id: Date.now(), // unique num base sa current timestamp
+    taskName,
+    note,
+    dueDate,
+    done: false
+  });
+  saveTasks(tasks);
+
+  // Clear inputsy for the next task
+  taskInput.value = '';
+  noteInput.value = '';
+  dueDateInput.value = '';
+
+  renderTasks();
+}
+
+addTaskBtn.addEventListener('click', addTask);

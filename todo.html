@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cozentials — To-Do List</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">Cozentials</span>
+    <a href="features.html" class="btn-gold">Dashboard</a>
+    <a href="about.html">About</a>
+    <span class="avatar">👤</span>
+  </nav>
+
+  <main class="tool-container">
+    <h1>To-Do List</h1>
+    <p class="tool-subtext">Add a task and its due date — we'll sort the rest.</p>
+
+    <div class="todo-add-row">
+  <input type="text" id="task-input" placeholder="Task name" class="text-input">
+  <input type="text" id="note-input" placeholder="Note (optional)" class="text-input">
+  <input type="date" id="due-date-input" class="text-input">
+  <button id="add-task-btn" class="btn-gold">+ Add Task</button>
+</div>
+
+    <h2>Missing</h2>
+    <div id="missing-section"></div>
+
+    <h2>Upcoming</h2>
+    <div id="upcoming-section"></div>
+
+    <h2>Done</h2>
+    <div id="done-section"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -106,6 +106,16 @@ nav a {
   font-size: 15px;
 }
 
+.login-form a.login-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 0;
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--ink);
+}
+
 .register-link {
   color: var(--cream);
   text-align: center;
@@ -297,7 +307,7 @@ nav a {
   font-size: 14px;
 }
 
-/* ===== HISTORY ===== */
+/* GWA HISTORY  */
 
 #history-section {
   margin-top: 12px;
@@ -333,4 +343,87 @@ nav a {
   cursor: pointer;
   font-size: 12px;
   flex-shrink: 0;
+}
+
+
+/* ===== TO-DO LIST ===== */
+
+.todo-add-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.todo-add-row .text-input {
+  flex: 1;
+  min-width: 150px;
+  margin-bottom: 0;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+  background: rgba(245,230,211,0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.task-row td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(245,230,211,0.1);
+  vertical-align: middle;
+}
+
+.task-name {
+  display: block;
+  font-weight: 600;
+}
+
+.task-note {
+  display: block;
+  font-size: 13px;
+  color: rgba(245,230,211,0.6);
+  margin-top: 2px;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-missing {
+  background: rgba(200,80,60,0.2);
+  color: #E8916E;
+}
+
+.status-upcoming {
+  background: rgba(232,193,126,0.2);
+  color: var(--gold);
+}
+
+.status-done {
+  background: rgba(140,180,140,0.2);
+  color: #A8CBA8;
+}
+
+.delete-task-btn {
+  background: rgba(162,81,46,0.15);
+  border: none;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  color: var(--cream);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.empty-message {
+  color: rgba(245,230,211,0.4);
+  font-size: 14px;
+  margin-bottom: 24px;
 }
