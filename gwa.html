@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cozentials — GWA Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <span class="logo">Cozentials</span>
+    <a href="features.html" class="btn-gold">Dashboard</a>
+    <a href="about.html">About</a>
+    <span class="avatar">👤</span>
+  </nav>
+
+<main class="tool-container">
+  <h1>GWA Calculator</h1>
+  <p class="tool-subtext">Enter your name and grades, then calculate.</p>
+
+  <div class="calculator-layout">
+
+    <div class="form-side">
+      <input type="text" id="name-input" placeholder="Your name" class="text-input">
+      <input type="text" id="program-input" placeholder="Program (e.g. BSIT)" class="text-input">
+      <input type="text" id="semester-input" placeholder="Semester (e.g. 1st Sem)" class="text-input">
+      <input type="text" id="year-input" placeholder="Year Level (e.g. 2nd Year)" class="text-input">
+      <select id="scale-input" class="text-input">
+          <option value="point">Point System (1.0–5.0)</option>
+          <option value="percentage">Numerical Grade (75–100)</option>
+</select>
+      <div class="grade-header">
+        <span>Subject</span>
+        <span>Grade</span>
+      </div>
+      <div id="grade-list">
+        <!-- grade rows go here -->
+      </div>
+
+      <div class="form-actions">
+        <button id="add-subject-btn" class="btn-secondary">+ Add Subject</button>
+        <button id="calculate-btn" class="btn-gold">Calculate GWA</button>
+        <button id="reset-btn" class="btn-outline">Reset</button>
+      </div>
+    </div>
+
+    <div class="result-side">
+      <div id="result-section">
+        <p class="result-placeholder">Your GWA will show up here.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>History</h2>
+  <div id="history-section"></div>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
