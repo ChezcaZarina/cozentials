@@ -19,10 +19,18 @@
     <h1>To-Do List</h1>
     <p class="tool-subtext">Add a task and its due date — we'll sort the rest.</p>
 
-    <div class="todo-add-row">
+   <div class="todo-add-row">
   <input type="text" id="task-input" placeholder="Task name" class="text-input">
   <input type="text" id="note-input" placeholder="Note (optional)" class="text-input">
   <input type="date" id="due-date-input" class="text-input">
+  <select id="category-input" class="text-input">
+    <option value="">No category</option>
+    <option value="School">School</option>
+    <option value="Personal">Personal</option>
+    <option value="Chores">Chores</option>
+    <option value="Work">Work</option>
+    <option value="Fitness">Fitness</option>
+  </select>
   <button id="add-task-btn" class="btn-gold">+ Add Task</button>
 </div>
 

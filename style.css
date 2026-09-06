@@ -427,3 +427,63 @@ nav a {
   font-size: 14px;
   margin-bottom: 24px;
 }
+
+/* Category Tags */
+.category-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.category-school { background: rgba(107,143,181,0.2); color: #6B8FB5; }
+.category-personal { background: rgba(199,123,154,0.2); color: #C77B9A; }
+.category-chores { background: rgba(217,178,92,0.2); color: #D9B25C; }
+.category-work { background: rgba(162,81,46,0.2); color: #A2512E; }
+.category-fitness { background: rgba(143,163,130,0.2); color: #8FA382; }
+
+/* ===== RESPONSIVE (MOBILE) ===== */
+
+@media (max-width: 768px) {
+  nav {
+    padding: 20px 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 24px 60px;
+  }
+
+  .login-form {
+    width: 100%;
+  }
+
+  .card-list {
+    padding: 0 24px 60px;
+  }
+
+  .card {
+    flex-wrap: wrap;
+  }
+
+  .tool-container {
+    padding: 24px 24px 60px;
+  }
+
+  .calculator-layout {
+    flex-direction: column;
+  }
+
+  .todo-add-row {
+    flex-direction: column;
+  }
+
+  .task-table, .task-row td {
+    font-size: 13px;
+  }
+}

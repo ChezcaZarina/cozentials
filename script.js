@@ -200,6 +200,7 @@ function getMotivation(gwa, scale) {
 const taskInput = document.getElementById('task-input');
 const noteInput = document.getElementById('note-input');
 const dueDateInput = document.getElementById('due-date-input');
+const categoryInput = document.getElementById('category-input');
 const addTaskBtn = document.getElementById('add-task-btn');
 
 const missingSection = document.getElementById('missing-section');
@@ -220,6 +221,7 @@ function addTask() {
   const taskName = taskInput.value.trim();
   const note = noteInput.value.trim();
   const dueDate = dueDateInput.value;
+  const category = categoryInput.value;
 
   if (!taskName) return; // don't add an empty task
 
@@ -229,6 +231,7 @@ function addTask() {
     taskName,
     note,
     dueDate,
+    category,
     done: false
   });
   saveTasks(tasks);
@@ -237,8 +240,113 @@ function addTask() {
   taskInput.value = '';
   noteInput.value = '';
   dueDateInput.value = '';
-
+  categoryInput.value = ''; 
   renderTasks();
 }
+// Figures out whether a task is "missing", "upcoming", or "done"
+function getStatus(task) {
+  if (task.done) return 'done';
+
+  if (!task.dueDate) return 'upcoming'; // no due date set, treat as upcoming
+
+  const today = new Date().toISOString().split('T')[0]; // today's date as YYYY-MM-DD
+  return task.dueDate < today ? 'missing' : 'upcoming';
+}
+
+// Builds one table row of HTML for a single task
+function buildTaskRow(task) {
+  const status = getStatus(task);
+
+  const statusLabels = {
+    missing: 'Missing',
+    upcoming: 'Upcoming',
+    done: 'Done'
+  };
+
+  return `
+    <tr class="task-row">
+      <td>
+        <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${task.done ? 'checked' : ''}>
+      </td>
+            <td>
+        <span class="task-name">
+          ${task.taskName}
+          ${task.category ? `<span class="category-tag category-${task.category.toLowerCase()}">${task.category}</span>` : ''}
+        </span>
+        ${task.note ? `<span class="task-note">${task.note}</span>` : ''}
+      </td>
+      <td>${task.dueDate || '—'}</td>
+      <td><span class="status-badge status-${status}">${statusLabels[status]}</span></td>
+      <td>
+        <button class="delete-task-btn" data-id="${task.id}">🗑</button>
+      </td>
+    </tr>
+  `;
+}
+
+// Groups all tasks by status and displays them in their matching section
+function renderTasks() {
+  const tasks = getTasks();
+
+  const missingTasks = tasks.filter(t => getStatus(t) === 'missing');
+  const upcomingTasks = tasks.filter(t => getStatus(t) === 'upcoming');
+  const doneTasks = tasks.filter(t => getStatus(t) === 'done');
+
+  renderSection(missingSection, missingTasks, 'Nothing missing.');
+  renderSection(upcomingSection, upcomingTasks, 'Nothing upcoming.');
+  renderSection(doneSection, doneTasks, 'Nothing done yet.');
+
+  attachTaskEvents();
+}
+
+// Fills one section with a table of tasks, or a placeholder message if empty
+function renderSection(sectionEl, tasks, emptyMessage) {
+  if (tasks.length === 0) {
+    sectionEl.innerHTML = `<p class="empty-message">${emptyMessage}</p>`;
+    return;
+  }
+
+  sectionEl.innerHTML = `
+    <table class="task-table">
+      <tbody>
+        ${tasks.map(buildTaskRow).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+// Connects checkbox + delete button clicks after the tasks are drawn
+function attachTaskEvents() {
+  document.querySelectorAll('.task-checkbox').forEach(box => {
+    box.addEventListener('change', () => {
+      toggleDone(parseInt(box.dataset.id));
+    });
+  });
+
+  document.querySelectorAll('.delete-task-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      deleteTask(parseInt(btn.dataset.id));
+    });
+  });
+}
+
+// Flips a task's done state on/off
+function toggleDone(id) {
+  const tasks = getTasks();
+  const task = tasks.find(t => t.id === id);
+  task.done = !task.done;
+  saveTasks(tasks);
+  renderTasks();
+}
+
+// Removes a task entirely
+function deleteTask(id) {
+  const tasks = getTasks().filter(t => t.id !== id);
+  saveTasks(tasks);
+  renderTasks();
+}
+
+// Show saved tasks immediately when the page loads
+renderTasks();
 
 addTaskBtn.addEventListener('click', addTask);
